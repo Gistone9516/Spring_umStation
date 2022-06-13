@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- DTD 선언 -->
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<mapper namespace="UserMapper">
+	<!-- DAO의 메서드가 될 것이다. -->
+	
+	<!-- 현재 시간 조회 -->
+	<select id="getTime" resultType="String"> 
+		SELECT now()
+	</select>
+	
+	<!-- 데이터 삽입 -->
+	<insert id = "insertUser">
+		INSERT INTO user(  user_id, user_name, user_pw, user_hp, user_birth, user_umCode, user_rental, user_ap, user_lp ) 
+					VALUES(#{user_id}, #{user_name}, #{user_pw}, #{user_hp}, #{user_birth}, #{user_umCode},#{user_rental},#{user_ap},#{user_lp})
+	</insert>
+	
+	<update id = "updateUserRental">
+	UPDATE user 
+				SET user_umCode = #{user_umCode}, user_rental = #{user_rental} 
+				WHERE user_id = #{user_id}
+	</update>
+	
+	<!--User 데이터 조회 -->
+	<select id="selectUser" resultType="com.spring.test.domain.userVO">
+	SELECT * from user
+		WHERE user_id = #{user_id}
+	</select>
+	
+	<select id="selectID" resultType="com.spring.test.domain.userVO">
+	SELECT user_id, user_pw from user
+		WHERE user_id = #{user_id}
+	</select>
+	
+	<select id="selectIDstate" resultType="com.spring.test.domain.userVO">
+	SELECT user_name, user_rental from user
+		WHERE user_id = #{user_id}
+	</select>
+	
+	<select id="existID" resultType="com.spring.test.domain.userVO">
+	SELECT EXISTS (select * from user where user_id = #{user_id} )
+	</select>
+	
+	
+</mapper>

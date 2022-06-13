@@ -1,0 +1,48 @@
+<!-- DTD 선언 -->
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<mapper namespace="RentalMapper">
+	<!-- DAO의 메서드가 될 것이다. -->
+	
+	<!-- 현재 시간 조회 -->
+	<select id="getTime" resultType="String"> 
+		SELECT now()
+	</select>
+	
+	
+	<!-- 데이터 삽입 -->
+	<insert id = "insertUm">
+	INSERT INTO rental_um(rental_umCode, rental_date, rental_statCode, user_id) 
+				VALUES(#{rental_umCode},#{rental_date},#{rental_statCode},#{user_id})
+	</insert>
+	
+	<insert id = "insertUmlog">
+	INSERT INTO rental_log(rental_num, rental_umCode, user_id, rental_date, rental_state) 
+				VALUES(#{rental_num}, #{rental_umCode}, #{user_id}, #{rental_date}, #{rental_state})
+	</insert>
+	
+	<update id = "updateUm">
+	UPDATE rental_um 
+				SET rental_date = #{rental_date}, rental_statCode = #{rental_statCode}, user_id = #{user_id} 
+				WHERE rental_umCode = #{rental_umCode}
+	</update>
+	
+	<!--DB 데이터 조회 -->
+	<select id="selectUm" resultType="com.spring.test.domain.rental_umVO">
+	SELECT * from rental_um
+		WHERE rental_umCode = #{rental_umCode}
+	</select>
+	
+	<select id="selectUmcode" resultType="com.spring.test.domain.rental_umVO">
+	SELECT rental_umCode from rental_um
+		WHERE rental_umCode = #{rental_umCode}
+	</select>
+	
+	<select id="selectUmlog" resultType="com.spring.test.domain.rental_logVO">
+	SELECT * from rental_log
+		WHERE rental_num = #{rental_num}
+	</select>
+	
+</mapper>

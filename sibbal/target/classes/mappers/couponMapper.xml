@@ -1,0 +1,21 @@
+<!-- DTD 선언 -->
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<mapper namespace="CouponMapper">
+	<!-- DAO의 메서드가 될 것이다. -->
+	
+	<!-- 현재 시간 조회 -->
+	<select id="getTime" resultType="String"> 
+		SELECT now()
+	</select>
+	
+	<!--DB 데이터 조회 -->
+	<select id="selectCoupon" resultType="com.spring.test.domain.couponVO">
+	SELECT * from coupon
+		WHERE user_id = #{user_id}
+	</select>
+	
+	
+</mapper>

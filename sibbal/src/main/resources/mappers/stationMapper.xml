@@ -1,0 +1,30 @@
+<!-- DTD 선언 -->
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<mapper namespace="StationMapper">
+	<!-- DAO의 메서드가 될 것이다. -->
+	
+	<!-- 현재 시간 조회 -->
+	<select id="getTime" resultType="String"> 
+		SELECT now()
+	</select>
+	
+	<update id = "updateHaveUm">
+	UPDATE station 
+				SET station_haveUm = #{station_haveUm}
+				WHERE station_num = #{station_num}
+	</update>
+	
+	<!--DB 데이터 조회 -->
+	<select id="selectStation" resultType="com.spring.test.domain.stationVO">
+	SELECT * from station 
+		WHERE station_num = #{station_num}
+	</select>
+	
+	<select id="selectStationAll" resultType="com.spring.test.domain.stationVO">
+	SELECT * from station
+	</select>
+	
+</mapper>
